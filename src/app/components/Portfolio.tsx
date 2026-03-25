@@ -44,35 +44,33 @@ export default function Portfolio() {
   return (
     <section className="py-28 px-6" style={{ background: 'var(--bg-card)' }}>
       <div className="max-w-6xl mx-auto">
-        <div ref={titleRef} className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
-          <div>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: shouldReduce ? 0 : 0.5, ease: EASE }}
-              className="text-xs font-bold tracking-widest uppercase mb-4"
-              style={{ color: 'var(--accent)' }}
-            >
-              Our Work
-            </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: shouldReduce ? 0 : 0.6, delay: 0.1, ease: EASE }}
-              className="text-4xl sm:text-5xl font-bold leading-tight"
-              style={{ color: 'var(--fg)' }}
-            >
-              Films we&apos;ve{' '}
-              <span style={{ color: 'var(--accent)' }}>crafted.</span>
-            </motion.h2>
-          </div>
+        <div ref={titleRef} className="text-center mb-12">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: shouldReduce ? 0 : 0.5, ease: EASE }}
+            className="text-xs font-bold tracking-widest uppercase mb-4"
+            style={{ color: 'var(--accent)' }}
+          >
+            Our Work
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: shouldReduce ? 0 : 0.6, delay: 0.1, ease: EASE }}
+            className="text-4xl sm:text-5xl font-bold leading-tight"
+            style={{ color: 'var(--fg)' }}
+          >
+            Films we&apos;ve{' '}
+            <span style={{ color: 'var(--accent)' }}>crafted.</span>
+          </motion.h2>
           <motion.a
             href="#contact"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: shouldReduce ? 0 : 0.5, delay: 0.2, ease: EASE }}
             whileHover={{ color: '#fff' }}
-            className="text-sm font-medium flex items-center gap-2 flex-shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-2 mt-4 text-sm font-medium cursor-pointer"
             style={{ color: 'var(--fg-muted)' }}
           >
             Request sample reels

@@ -77,7 +77,7 @@ export default function WhyUs() {
       style={{ background: 'var(--bg-card)' }}
     >
       <div className="max-w-6xl mx-auto">
-        <div ref={titleRef} className="mb-16">
+        <div ref={titleRef} className="mb-16 text-center">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -91,7 +91,7 @@ export default function WhyUs() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: shouldReduce ? 0 : 0.6, delay: 0.1, ease: EASE }}
-            className="text-4xl sm:text-5xl font-bold max-w-xl leading-tight"
+            className="text-4xl sm:text-5xl font-bold leading-tight mx-auto"
             style={{ color: 'var(--fg)' }}
           >
             We edit. <span style={{ color: 'var(--accent)' }}>You grow.</span>
