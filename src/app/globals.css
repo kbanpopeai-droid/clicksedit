@@ -1,33 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --bg:           #ffffff;
-  --bg-alt:       #f5f5f7;
-  --bg-card:      #ffffff;
-  --fg:           #1d1d1f;
-  --fg-secondary: #6e6e73;
-  --fg-tertiary:  #86868b;
-  --accent:       #0071e3;
-  --accent-hover: #0077ed;
-  --border:       rgba(0, 0, 0, 0.1);
-  --border-light: rgba(0, 0, 0, 0.06);
-  --radius-lg:    28px;
-  --radius-md:    18px;
-  --radius-sm:    12px;
-  --ease-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --bg:             #07070a;
+  --bg-alt:         #0d0d12;
+  --bg-card:        #111118;
+  --bg-elevated:    #16161e;
+  --bg-light:       #f5f5f7;
+  --fg:             #f0f0f5;
+  --fg-secondary:   #8a8a9a;
+  --fg-dim:         #3a3a4a;
+  --accent:         #f97316;
+  --accent-dim:     rgba(249,115,22,0.12);
+  --accent-glow:    rgba(249,115,22,0.28);
+  --border:         rgba(255,255,255,0.07);
+  --border-strong:  rgba(255,255,255,0.13);
+  --radius-lg:      24px;
+  --radius-md:      16px;
+  --ease-expo:      cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { color-scheme: light; scroll-behavior: smooth; }
+html { color-scheme: dark; scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
-    'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display), Georgia, serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
