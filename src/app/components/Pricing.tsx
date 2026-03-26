@@ -10,44 +10,21 @@ const plans = [
     name: 'Highlight',
     price: 'From €149',
     desc: 'Perfect for wedding highlight films and short commercial reels.',
-    features: [
-      'Up to 8 minutes finished film',
-      'Music sync & colour grade',
-      '2 rounds of revisions',
-      '5-day turnaround',
-      'Delivery via cloud link',
-    ],
-    cta: 'Get Started',
+    features: ['Up to 8 minutes finished film', 'Music sync & colour grade', '2 rounds of revisions', '5-day turnaround', 'Delivery via cloud link'],
     highlight: false,
   },
   {
     name: 'Feature',
     price: 'From €299',
-    desc: 'Full wedding films and detailed commercial projects. Our most popular package.',
-    features: [
-      'Up to 20 minutes finished film',
-      'Full colour grade & audio mix',
-      '3 rounds of revisions',
-      '7-day turnaround',
-      'Multicam sync included',
-      'Priority support',
-    ],
-    cta: 'Most Popular',
+    desc: 'Full wedding films and detailed commercial projects.',
+    features: ['Up to 20 minutes finished film', 'Full colour grade & audio mix', '3 rounds of revisions', '7-day turnaround', 'Multicam sync included', 'Priority support'],
     highlight: true,
   },
   {
     name: 'Documentary',
     price: 'From €499',
     desc: 'Long-form documentary edits and custom bespoke projects.',
-    features: [
-      '45–90+ min finished edit',
-      'Full post-production suite',
-      'Unlimited revisions',
-      '14-day turnaround',
-      'Dedicated editor assigned',
-      'Motion graphics included',
-    ],
-    cta: 'Get Started',
+    features: ['45–90+ min finished edit', 'Full post-production suite', 'Unlimited revisions', '14-day turnaround', 'Dedicated editor assigned', 'Motion graphics included'],
     highlight: false,
   },
 ]
@@ -58,14 +35,14 @@ export default function Pricing() {
   const shouldReduce = useReducedMotion()
 
   return (
-    <section id="pricing" className="py-28 px-6" style={{ background: 'var(--bg)' }}>
-      <div className="max-w-6xl mx-auto">
-        <div ref={titleRef} className="text-center mb-16">
+    <section id="pricing" className="py-28 px-6" style={{ background: 'var(--bg-alt)' }}>
+      <div className="max-w-5xl mx-auto">
+        <div ref={titleRef} className="text-center mb-14">
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: shouldReduce ? 0 : 0.5, ease: EASE }}
-            className="text-xs font-bold tracking-widest uppercase mb-4"
+            className="text-sm font-medium mb-4"
             style={{ color: 'var(--accent)' }}
           >
             Pricing
@@ -74,25 +51,23 @@ export default function Pricing() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: shouldReduce ? 0 : 0.6, delay: 0.1, ease: EASE }}
-            className="text-4xl sm:text-5xl font-bold leading-tight"
-            style={{ color: 'var(--fg)' }}
+            className="text-4xl sm:text-6xl font-semibold leading-tight"
+            style={{ color: 'var(--fg)', letterSpacing: '-0.03em' }}
           >
-            Transparent pricing.
-            <br />
-            <span style={{ color: 'var(--accent)' }}>No surprises.</span>
+            Transparent pricing.<br />No surprises.
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: shouldReduce ? 0 : 0.6, delay: 0.2, ease: EASE }}
-            className="mt-4 text-sm font-light max-w-md mx-auto"
-            style={{ color: 'var(--fg-muted)' }}
+            transition={{ duration: shouldReduce ? 0 : 0.5, delay: 0.2, ease: EASE }}
+            className="mt-4 text-lg max-w-md mx-auto"
+            style={{ color: 'var(--fg-secondary)' }}
           >
-            Custom quotes available for bulk orders, ongoing retainer packages, and international clients.
+            Custom quotes available for bulk orders and ongoing retainer packages.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
           {plans.map((plan, i) => {
             const ref = useRef<HTMLDivElement>(null)
             const planInView = useInView(ref, { once: true, margin: '-50px' })
@@ -101,50 +76,50 @@ export default function Pricing() {
               <motion.div
                 key={plan.name}
                 ref={ref}
-                initial={{ opacity: 0, y: 32 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={planInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: shouldReduce ? 0 : 0.6, delay: i * 0.1, ease: EASE }}
-                className="relative flex flex-col gap-6 p-8 rounded-2xl"
+                className="relative flex flex-col gap-6 p-8 rounded-3xl"
                 style={{
-                  background: plan.highlight ? 'var(--bg-elevated)' : 'var(--bg-card)',
-                  border: plan.highlight ? '1px solid rgba(255,69,0,0.4)' : '1px solid var(--border)',
-                  boxShadow: plan.highlight ? '0 0 60px rgba(255,69,0,0.1)' : 'none',
+                  background: plan.highlight ? 'var(--fg)' : 'var(--bg)',
+                  border: plan.highlight ? 'none' : '1px solid var(--border-light)',
                 }}
               >
                 {plan.highlight && (
                   <div
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase"
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-semibold"
                     style={{ background: 'var(--accent)', color: '#fff' }}
                   >
                     Most Popular
                   </div>
                 )}
 
-                <div className="flex flex-col gap-1">
-                  <span className="text-xs font-bold tracking-widest uppercase" style={{ color: 'var(--accent)' }}>
+                <div>
+                  <p className="text-sm font-semibold mb-1"
+                    style={{ color: plan.highlight ? 'rgba(255,255,255,0.6)' : 'var(--fg-tertiary)' }}>
                     {plan.name}
-                  </span>
-                  <div className="text-3xl font-bold" style={{ color: 'var(--fg)' }}>
+                  </p>
+                  <p className="text-3xl font-semibold"
+                    style={{ color: plan.highlight ? '#fff' : 'var(--fg)', letterSpacing: '-0.02em' }}>
                     {plan.price}
-                  </div>
-                  <p className="text-sm font-light" style={{ color: 'var(--fg-muted)' }}>
+                  </p>
+                  <p className="text-sm mt-2"
+                    style={{ color: plan.highlight ? 'rgba(255,255,255,0.6)' : 'var(--fg-secondary)' }}>
                     {plan.desc}
                   </p>
                 </div>
 
-                <div className="h-px w-full" style={{ background: 'var(--border)' }} />
+                <div className="h-px" style={{ background: plan.highlight ? 'rgba(255,255,255,0.15)' : 'var(--border-light)' }} />
 
                 <ul className="flex flex-col gap-3">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3 text-sm font-light" style={{ color: 'var(--fg-muted)' }}>
-                      <span
-                        className="flex-shrink-0 mt-0.5 w-4 h-4 rounded-full flex items-center justify-center"
-                        style={{ background: 'rgba(255,69,0,0.15)', color: 'var(--accent)' }}
-                      >
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
-                          <path d="M2 4L3.5 5.5L6 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </span>
+                    <li key={f} className="flex items-start gap-2.5 text-sm"
+                      style={{ color: plan.highlight ? 'rgba(255,255,255,0.75)' : 'var(--fg-secondary)' }}>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="flex-shrink-0 mt-0.5" aria-hidden="true">
+                        <path d="M2.5 7L5.5 10L11.5 4"
+                          stroke={plan.highlight ? 'rgba(255,255,255,0.8)' : 'var(--accent)'}
+                          strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
                       {f}
                     </li>
                   ))}
@@ -152,17 +127,16 @@ export default function Pricing() {
 
                 <motion.a
                   href="#contact"
-                  whileHover={{ scale: 1.03, boxShadow: plan.highlight ? '0 0 30px var(--accent-glow)' : 'none' }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ duration: 0.18 }}
-                  className="mt-auto text-center py-3 rounded-full text-sm font-semibold cursor-pointer block"
+                  whileHover={{ opacity: 0.88 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.15 }}
+                  className="mt-auto block text-center py-3 rounded-full text-sm font-medium cursor-pointer"
                   style={{
-                    background: plan.highlight ? 'var(--accent)' : 'transparent',
-                    color: plan.highlight ? '#fff' : 'var(--fg-muted)',
-                    border: plan.highlight ? 'none' : '1px solid var(--border-strong)',
+                    background: plan.highlight ? '#fff' : 'var(--accent)',
+                    color: plan.highlight ? 'var(--fg)' : '#fff',
                   }}
                 >
-                  {plan.highlight ? plan.cta : 'Get Started'}
+                  Get Started
                 </motion.a>
               </motion.div>
             )

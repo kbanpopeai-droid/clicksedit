@@ -1,28 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --bg:            #080808;
-  --bg-card:       #111111;
-  --bg-elevated:   #181818;
-  --fg:            #F5F5F5;
-  --fg-muted:      #888888;
-  --fg-dim:        #444444;
-  --accent:        #FF4500;
-  --accent-dim:    rgba(255, 69, 0, 0.15);
-  --accent-glow:   rgba(255, 69, 0, 0.3);
-  --border:        rgba(255, 255, 255, 0.07);
-  --border-strong: rgba(255, 255, 255, 0.14);
-  --ease-expo:     cubic-bezier(0.16, 1, 0.3, 1);
+  --bg:           #ffffff;
+  --bg-alt:       #f5f5f7;
+  --bg-card:      #ffffff;
+  --fg:           #1d1d1f;
+  --fg-secondary: #6e6e73;
+  --fg-tertiary:  #86868b;
+  --accent:       #0071e3;
+  --accent-hover: #0077ed;
+  --border:       rgba(0, 0, 0, 0.1);
+  --border-light: rgba(0, 0, 0, 0.06);
+  --radius-lg:    28px;
+  --radius-md:    18px;
+  --radius-sm:    12px;
+  --ease-expo:    cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { color-scheme: dark; scroll-behavior: smooth; }
+html { color-scheme: light; scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-dm), system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Helvetica Neue', Arial, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }

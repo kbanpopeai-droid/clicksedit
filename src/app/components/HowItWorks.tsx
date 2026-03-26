@@ -9,31 +9,32 @@ const steps = [
   {
     step: '01',
     title: 'Send Your Footage',
-    desc: 'Upload your raw files via our simple transfer link. Include your brief, music choice, and any notes. No complex onboarding.',
+    desc: 'Upload your raw files via WeTransfer, Google Drive, or Dropbox. Include your brief, music choice, and any style notes.',
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M24 18v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5M19 9l-5-5-5 5M14 4v16" stroke="var(--accent)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
   {
     step: '02',
     title: 'We Edit',
-    desc: 'Our editors get to work — cutting, grading, and perfecting every frame to match your style and your client\'s vision.',
+    desc: 'Our editors cut, colour grade, and perfect every frame to match your style and your client\'s vision.',
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M14.5 4h-5L7 7H4a2 2 0 00-2 2v9a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2h-3l-2.5-3z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="12" cy="13" r="3" stroke="currentColor" strokeWidth="1.6" />
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <rect x="3" y="6" width="22" height="16" rx="2" stroke="var(--accent)" strokeWidth="1.6" />
+        <circle cx="14" cy="14" r="4" stroke="var(--accent)" strokeWidth="1.6" />
+        <path d="M14 10v-2M14 18v2M10 14H8M20 14h-2" stroke="var(--accent)" strokeWidth="1.4" strokeLinecap="round" />
       </svg>
     ),
   },
   {
     step: '03',
     title: 'You Deliver',
-    desc: 'Receive your polished edit ready for client delivery. Request revisions anytime — we\'re your invisible team until it\'s perfect.',
+    desc: 'Receive your polished edit ready for client delivery. Request revisions anytime — we\'re your invisible team.',
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <polyline points="20 6 9 17 4 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M5 14l7 7L23 8" stroke="var(--accent)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -45,18 +46,14 @@ export default function HowItWorks() {
   const shouldReduce = useReducedMotion()
 
   return (
-    <section
-      id="how-it-works"
-      className="py-28 px-6"
-      style={{ background: 'var(--bg-card)' }}
-    >
-      <div className="max-w-6xl mx-auto">
-        <div ref={titleRef} className="mb-16 text-center">
+    <section id="how-it-works" className="py-28 px-6" style={{ background: 'var(--bg-alt)' }}>
+      <div className="max-w-5xl mx-auto">
+        <div ref={titleRef} className="text-center mb-16">
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: shouldReduce ? 0 : 0.5, ease: EASE }}
-            className="text-xs font-bold tracking-widest uppercase mb-4"
+            className="text-sm font-medium mb-4"
             style={{ color: 'var(--accent)' }}
           >
             The Process
@@ -65,22 +62,14 @@ export default function HowItWorks() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: shouldReduce ? 0 : 0.6, delay: 0.1, ease: EASE }}
-            className="text-4xl sm:text-5xl font-bold leading-tight mx-auto"
-            style={{ color: 'var(--fg)' }}
+            className="text-4xl sm:text-6xl font-semibold leading-tight"
+            style={{ color: 'var(--fg)', letterSpacing: '-0.03em' }}
           >
-            Simple. Fast.{' '}
-            <span style={{ color: 'var(--accent)' }}>Invisible.</span>
+            Simple. Fast. Invisible.
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Connecting line (desktop) */}
-          <div
-            className="hidden md:block absolute top-9 left-[calc(16.66%+1rem)] right-[calc(16.66%+1rem)] h-px"
-            style={{ background: 'linear-gradient(90deg, var(--border), var(--accent-dim), var(--border))' }}
-            aria-hidden="true"
-          />
-
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.map((step, i) => {
             const ref = useRef<HTMLDivElement>(null)
             const stepInView = useInView(ref, { once: true, margin: '-50px' })
@@ -89,32 +78,26 @@ export default function HowItWorks() {
               <motion.div
                 key={step.step}
                 ref={ref}
-                initial={{ opacity: 0, y: 32 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={stepInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: shouldReduce ? 0 : 0.6, delay: i * 0.15, ease: EASE }}
-                className="flex flex-col gap-5"
+                transition={{ duration: shouldReduce ? 0 : 0.6, delay: i * 0.12, ease: EASE }}
+                className="flex flex-col gap-5 p-8 rounded-3xl"
+                style={{ background: 'var(--bg)' }}
               >
-                {/* Icon circle */}
                 <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
-                  style={{
-                    background: 'var(--bg-elevated)',
-                    border: '1px solid var(--border-strong)',
-                    color: 'var(--accent)',
-                  }}
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                  style={{ background: 'rgba(0,113,227,0.08)' }}
                 >
                   {step.icon}
                 </div>
-
-                {/* Text */}
-                <div className="flex flex-col gap-2">
-                  <span className="text-xs font-bold tracking-widest" style={{ color: 'var(--accent)' }}>
+                <div>
+                  <p className="text-xs font-semibold mb-2" style={{ color: 'var(--fg-tertiary)' }}>
                     Step {step.step}
-                  </span>
-                  <h3 className="text-xl font-bold" style={{ color: 'var(--fg)' }}>
+                  </p>
+                  <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--fg)', letterSpacing: '-0.02em' }}>
                     {step.title}
                   </h3>
-                  <p className="text-sm leading-relaxed font-light" style={{ color: 'var(--fg-muted)' }}>
+                  <p className="text-base leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
                     {step.desc}
                   </p>
                 </div>
