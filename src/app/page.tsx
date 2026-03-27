@@ -1,33 +1,27 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Marquee from './components/Marquee'
-import Services from './components/Services'
-import HowItWorks from './components/HowItWorks'
-import Portfolio from './components/Portfolio'
-import Testimonials from './components/Testimonials'
-import WhyUs from './components/WhyUs'
-import Pricing from './components/Pricing'
-import FAQ from './components/FAQ'
-import CTABanner from './components/CTABanner'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
+import Statement from "@/components/sections/Statement";
+import FeaturedWork from "@/components/sections/FeaturedWork";
+import WhyUs from "@/components/sections/WhyUs";
+import Process from "@/components/sections/Process";
+import Testimonials from "@/components/sections/Testimonials";
+import FinalCTA from "@/components/sections/FinalCTA";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Navbar />
-      <Hero />
-      <Marquee />
-      <Services />
-      <HowItWorks />
-      <Portfolio />
-      <Testimonials />
-      <WhyUs />
-      <Pricing />
-      <FAQ />
-      <CTABanner />
-      <Contact />
+      <main>
+        <Hero />
+        <Statement />
+        <FeaturedWork />
+        <WhyUs />
+        <Process />
+        <Testimonials />
+        <FinalCTA />
+      </main>
       <Footer />
-    </main>
-  )
+    </>
+  );
 }

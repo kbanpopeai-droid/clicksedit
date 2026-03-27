@@ -1,37 +1,83 @@
 @import "tailwindcss";
 
 :root {
-  --bg:             #07070a;
-  --bg-alt:         #0d0d12;
-  --bg-card:        #111118;
-  --bg-elevated:    #16161e;
-  --bg-light:       #f5f5f7;
-  --fg:             #f0f0f5;
-  --fg-secondary:   #8a8a9a;
-  --fg-dim:         #3a3a4a;
-  --accent:         #f97316;
-  --accent-dim:     rgba(249,115,22,0.12);
-  --accent-glow:    rgba(249,115,22,0.28);
-  --border:         rgba(255,255,255,0.07);
-  --border-strong:  rgba(255,255,255,0.13);
-  --radius-lg:      24px;
-  --radius-md:      16px;
-  --ease-expo:      cubic-bezier(0.16, 1, 0.3, 1);
+  /* — Palette — */
+  --bg:             #0A0806;
+  --bg-alt:         #100D09;
+  --bg-card:        #161210;
+  --bg-elevated:    #1E1915;
+  --cream:          #EDE0CC;
+  --cream-dim:      #B8A994;
+  --gold:           #C4975A;
+  --gold-bright:    #D4AA6E;
+  --gold-dim:       rgba(196,151,90,0.10);
+  --gold-glow:      rgba(196,151,90,0.20);
+  --fg:             #EDE0CC;
+  --fg-secondary:   #A09282;
+  --fg-dim:         #4A3F35;
+  --border:         rgba(196,151,90,0.10);
+  --border-strong:  rgba(196,151,90,0.20);
+
+  /* — Radius — */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  32px;
+
+  /* — Easing — */
+  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-circ:   cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { color-scheme: dark; scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--font-body), "system-ui", sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--fg-dim); border-radius: 4px; }
+
+/* Selection */
+::selection { background: var(--gold-dim); color: var(--gold-bright); }
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Grain overlay — applied via pseudo on body */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.030;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 @media (prefers-reduced-motion: reduce) {
