@@ -1,42 +1,57 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 const signals = [
-  { label: "300+ wedding films delivered" },
-  { label: "5+ years of cinematic editing" },
-  { label: "48-hour rough cut guarantee" },
-  { label: "98% client retention rate" },
-  { label: "Waterford, Ireland · remote-first" },
+  "300+ Wedding Films Delivered",
+  "5+ Years of Cinematic Editing",
+  "48-Hour Rough Cut Guarantee",
+  "98% Client Retention Rate",
+  "Unlimited Revisions on Every Project",
+  "Waterford, Ireland · Serving Studios Globally",
+  "Music Licensing Included",
+  "4K Broadcast-Quality Export",
 ];
+
+// Duplicate for seamless loop
+const all = [...signals, ...signals];
 
 export default function TrustBar() {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="border-y border-[var(--border)] bg-[var(--bg-alt)] overflow-hidden"
+    <div
+      className="border-y border-[var(--border)] overflow-hidden bg-[var(--bg-alt)]"
+      aria-label="Studio highlights"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="flex flex-wrap items-center justify-between gap-4 py-4">
-          {signals.map((s, i) => (
-            <div key={i} className="flex items-center gap-3">
+      <div
+        className="flex items-center whitespace-nowrap py-3.5"
+        aria-hidden="true"
+      >
+        <div className="flex items-center gap-0 animate-marquee">
+          {all.map((s, i) => (
+            <span key={i} className="flex items-center gap-0">
+              <span
+                className="text-[11px] uppercase tracking-[0.2em] px-7"
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 500,
+                  color: i % 2 === 0 ? "var(--fg-secondary)" : "var(--fg-dim)",
+                }}
+              >
+                {s}
+              </span>
               <span
                 className="w-1 h-1 rounded-full flex-shrink-0"
-                style={{ background: "var(--gold)" }}
-                aria-hidden="true"
+                style={{ background: "var(--gold)", opacity: 0.4 }}
               />
-              <span
-                className="text-xs font-[var(--font-body)] text-[var(--fg-secondary)] tracking-wide whitespace-nowrap"
-              >
-                {s.label}
-              </span>
-            </div>
+            </span>
           ))}
         </div>
       </div>
-    </motion.div>
+
+      {/* Accessible text (hidden from marquee) */}
+      <ul className="sr-only">
+        {signals.map((s) => (
+          <li key={s}>{s}</li>
+        ))}
+      </ul>
+    </div>
   );
 }

@@ -1,93 +1,250 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────
+   DESIGN TOKENS
+   ───────────────────────────────────────── */
 :root {
-  /* — Palette — */
+  /* Backgrounds */
   --bg:             #0A0806;
-  --bg-alt:         #0F0C09;
-  --bg-card:        #161210;
-  --bg-elevated:    #1E1915;
-  --cream:          #EDE0CC;
-  --cream-dim:      #B8A994;
-  --gold:           #C4975A;
-  --gold-bright:    #D4AA6E;
-  --gold-dim:       rgba(196,151,90,0.10);
-  --gold-glow:      rgba(196,151,90,0.22);
-  --fg:             #EDE0CC;
-  --fg-secondary:   #9A8C7E;
-  --fg-dim:         #4A3F35;
-  --border:         rgba(196,151,90,0.09);
-  --border-strong:  rgba(196,151,90,0.18);
+  --bg-alt:         #0D0A07;
+  --bg-card:        #141009;
+  --bg-elevated:    #1C1610;
+  --bg-surface:     rgba(255 255 255 / 0.03);
 
-  /* — Radius — */
+  /* Foreground */
+  --cream:          #EDE0CC;
+  --cream-dim:      #C2B09A;
+  --fg:             #EDE0CC;
+  --fg-secondary:   #8A7A6A;
+  --fg-dim:         #44382C;
+  --fg-muted:       #2E2520;
+
+  /* Gold accent */
+  --gold:           #C49A5C;
+  --gold-bright:    #D4AE72;
+  --gold-dim:       rgba(196 154 92 / 0.10);
+  --gold-glow:      rgba(196 154 92 / 0.18);
+  --gold-border:    rgba(196 154 92 / 0.14);
+  --gold-border-strong: rgba(196 154 92 / 0.26);
+
+  /* Semantic */
+  --border:         rgba(196 154 92 / 0.09);
+  --border-strong:  rgba(196 154 92 / 0.18);
+  --error:          #F87171;
+  --success:        #86EFAC;
+
+  /* Spacing scale (4pt base) */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Radii */
   --radius-sm:  6px;
   --radius-md:  12px;
   --radius-lg:  20px;
-  --radius-xl:  32px;
+  --radius-xl:  28px;
+  --radius-2xl: 36px;
 
-  /* — Easing — */
-  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-circ:   cubic-bezier(0.0, 0.0, 0.2, 1);
+  /* Easing */
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-circ:    cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Z-index scale */
+  --z-base:     0;
+  --z-raised:   10;
+  --z-overlay:  20;
+  --z-modal:    40;
+  --z-toast:    60;
+  --z-nav:      80;
+  --z-grain:    9999;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ─────────────────────────────────────────
+   RESET
+   ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+/* ─────────────────────────────────────────
+   BASE
+   ───────────────────────────────────────── */
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
   font-size: 16px;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--font-body), "DM Sans", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* touch-action: manipulation reduces 300ms tap delay */
+  touch-action: manipulation;
 }
 
+/* ─────────────────────────────────────────
+   TYPOGRAPHY SYSTEM
+   ───────────────────────────────────────── */
 h1, h2, h3, h4 {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--fg-dim); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+/* Body text: comfortable reading measure */
+p {
+  line-height: 1.7;
+  max-width: 68ch; /* prevent runaway lines */
+}
 
-/* Selection */
-::selection { background: var(--gold-dim); color: var(--gold-bright); }
+/* Labels — tabular figures prevent layout shift */
+.tabular { font-variant-numeric: tabular-nums; }
 
-/* Focus ring */
+/* ─────────────────────────────────────────
+   INTERACTIVE STATES
+   ───────────────────────────────────────── */
+
+/* Focus ring — accessible, on-brand */
 :focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
-/* Film grain overlay */
+/* Remove outline for mouse users */
+:focus:not(:focus-visible) { outline: none; }
+
+/* Touch target helpers */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─────────────────────────────────────────
+   SCROLLBAR
+   ───────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--fg-dim); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ─────────────────────────────────────────
+   SELECTION
+   ───────────────────────────────────────── */
+::selection {
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+}
+
+/* ─────────────────────────────────────────
+   GLASS MORPHISM UTILITY
+   ───────────────────────────────────────── */
+.glass {
+  background: rgba(10, 8, 6, 0.72);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--border);
+}
+
+.glass-card {
+  background: rgba(20, 16, 9, 0.65);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--border);
+}
+
+/* ─────────────────────────────────────────
+   GRADIENT BORDER UTILITY
+   Used on featured/hover cards
+   ───────────────────────────────────────── */
+.border-gold-gradient {
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+.border-gold-gradient::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(196,154,92,0.3),
+    rgba(196,154,92,0.05),
+    rgba(196,154,92,0.2)
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────
+   FILM GRAIN OVERLAY
+   Cinematic texture — applied as fixed overlay
+   ───────────────────────────────────────── */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
+  z-index: var(--z-grain);
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  mix-blend-mode: overlay;
 }
 
-/* Smooth video opacity transition */
-.transition-opacity { transition-property: opacity; }
-.duration-2000 { transition-duration: 2000ms; }
+/* ─────────────────────────────────────────
+   VIDEO TRANSITION
+   ───────────────────────────────────────── */
+.video-fade-in {
+  transition: opacity 2s ease-in-out;
+}
 
+/* ─────────────────────────────────────────
+   MARQUEE ANIMATION
+   ───────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────────
+   REDUCED MOTION
+   ───────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  .duration-2000 { transition-duration: 0.01ms !important; }
+  .animate-marquee { animation: none; }
 }
